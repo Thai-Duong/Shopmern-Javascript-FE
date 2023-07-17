@@ -20,7 +20,7 @@ export default function ItemCart({
         <div className="mx-3">{item.cartQuantity}</div>
         <button onClick={() => hanldeMinusCart(item)}>➖</button>
       </div>
-      <div>${item.price * item.cartQuantity}</div>
+      <div>{formatCurrency(item.price * item.cartQuantity)}</div>
       <div>
         <button onClick={() => hanldeDelToCart(item)}>XÓA</button>
       </div>

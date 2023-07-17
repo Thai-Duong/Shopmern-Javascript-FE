@@ -3,7 +3,7 @@ import MenuAdmin from "../../components/MenuAdmin";
 
 export default function LayoutAdmin({ children }) {
   return (
-    <div className="grid grid-cols-12 gap-6">
+    <div className="grid grid-cols-12 gap-6 mx-[100px]">
       <div className="col-span-2">
         <MenuAdmin />
       </div>

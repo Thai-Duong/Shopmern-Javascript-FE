@@ -1,12 +1,12 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
-import Input from "../../components/Input";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import * as yup from "yup";
+import Input from "../../components/Input";
 import { login } from "../../redux/userSlice";
 
 const LoginSchema = yup
@@ -31,17 +31,16 @@ export default function Login() {
       axios
         .post("http://localhost:8080/users/login", data)
         .then(function (response) {
-          if (response.data.status == "ERR") {
+          if (response.data.status === "ERR") {
             toast.error(response.data.message);
           } else {
             dispatch(login(response.data));
             toast.success("Login success");
             navigate("/");
-            console.log(response.data);
           }
         })
         .catch(function (error) {
-          console.log(error);
+          toast.error(error);
         });
     }
   };

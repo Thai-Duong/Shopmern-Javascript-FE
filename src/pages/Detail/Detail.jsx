@@ -17,7 +17,7 @@ export default function Detail() {
     dispatch(addToCart(item));
     toast.success("Thêm vào giỏ hàng thành công");
   };
-
+  if (!product) return null;
   return (
     <div>
       <div className="px-4 mx-auto mt-10 max-w-7xl">
@@ -48,7 +48,7 @@ export default function Detail() {
                   onClick={() => hanldeAddToCart(product)}
                   className="flex items-center justify-center h-12 px-10 text-white capitalize bg-red-600 border border-red-500 rounded-lg hover:bg-red-300"
                 >
-                  ADD TO CART
+                  THÊM VÀO GIỎ HÀNG
                 </button>
               </div>
             </div>

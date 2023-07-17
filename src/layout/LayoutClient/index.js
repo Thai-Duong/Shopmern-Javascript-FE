@@ -1,3 +1,3 @@
-import Layout from "./Layout";
+import LayoutClient from "./LayoutClient";
 
-export default Layout;
+export default LayoutClient;

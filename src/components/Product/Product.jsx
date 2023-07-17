@@ -14,12 +14,10 @@ export default function Product({ item }) {
           />
         </div>
         <div className="p-2 overflow-hiden ">
-          <div className="line-clamp-2 min-h-[1rem] text-sm ">{item.name}</div>
-          <div className="flex items-center mt-2">
-            <div className="ml-1 truncate">
-              <span className="text-xs">₫</span>
-              <span>{formatCurrency(item.price)}</span>
-            </div>
+          <div className="min-h-[1.5rem] text-sm line-clamp-1">{item.name}</div>
+          <div className="mt-2 ml-1 truncate text-orangw">
+            <span className="text-xs">₫</span>
+            <span>{formatCurrency(item.price)}</span>
           </div>
         </div>
       </div>

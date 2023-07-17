@@ -22,7 +22,7 @@ export default function Popover({ children, rederpopover }) {
       ref={refs.setReference}
       onMouseEnter={showPopover}
       onMouseLeave={hidePopover}
-      className="flex items-center py-1 mr-6 cursor-pointer hover:text-gray-500"
+      className="flex items-center py-1 mr-6 cursor-pointer "
     >
       {children}
       <FloatingPortal>
@@ -42,7 +42,7 @@ export default function Popover({ children, rederpopover }) {
                 left: middlewareData.arrow?.x,
                 top: middlewareData.arrow?.y,
               }}
-              className="bg-gray-500 absolute -translate-y-full border-[11px] border-x-transparent  border-t-transparent"
+              className=" absolute -translate-y-full border-[11px] border-x-transparent  border-t-transparent"
             />
             {rederpopover}
           </div>
