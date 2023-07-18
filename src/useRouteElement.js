@@ -1,8 +1,7 @@
 import React, { Suspense, lazy } from "react";
-import LayoutClient from "./layout/LayoutClient";
-import { Navigate, useRoutes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import LayoutAdmin from "./layout/LayoutAdmin";
-import { useSelector } from "react-redux";
+import LayoutClient from "./layout/LayoutClient";
 
 const Login = lazy(() => import("./pages/Login"));
 const Home = lazy(() => import("./pages/Home"));
@@ -16,19 +15,11 @@ const Product = lazy(() => import("./pages/Product/ProductAdd/AddProduct"));
 const OrderList = lazy(() => import("./pages/Order/OrderList/OrderList"));
 const OrderDetail = lazy(() => import("./pages/Order/OrderDetail"));
 const UserList = lazy(() => import("./pages/User/UserList/UserList"));
-const UserUpdate = lazy(() => import("./pages/Admin/Admin"));
+const UserUpdate = lazy(() => import("./pages/User/UserUpdate"));
 const ProductUpdate = lazy(() =>
   import("./pages/Product/ProductUpdate/ProductUpdate")
 );
-// function ProtectRoute() {
-//   const result = localStorage.getItem("user");
-//   console.log(result);
-//   return result.isAdmin == true ? (
-//     <Navigate to="/admin" />
-//   ) : (
-//     <Navigate to="/" />
-//   );
-// }
+
 export default function useRouteElement() {
   // eslint-disable-next-line no-sparse-arrays
   const routerElement = useRoutes([
@@ -93,13 +84,7 @@ export default function useRouteElement() {
         </LayoutClient>
       ),
     },
-    // {
-    //   path: "",
-    //   element: <ProtectRoute />,
-    //   children: [
 
-    //   ],
-    // },
     {
       path: "/admin",
       element: (

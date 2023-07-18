@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import Input from "../../components/Input";
 import { login } from "../../redux/userSlice";
+import { REACT_API_URL } from "../../utils/http";
 
 const LoginSchema = yup
   .object({
@@ -29,7 +30,7 @@ export default function Login() {
   const onSubmit = (data) => {
     if (data) {
       axios
-        .post("http://localhost:8080/users/login", data)
+        .post(`${REACT_API_URL}/users/login`, data)
         .then(function (response) {
           if (response.data.status === "ERR") {
             toast.error(response.data.message);

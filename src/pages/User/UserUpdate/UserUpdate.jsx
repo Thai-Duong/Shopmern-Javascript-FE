@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import Input from "../../../components/Input";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { toast } from "react-toastify";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { setUser } from "../../../redux/userSlice";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import * as yup from "yup";
+import Input from "../../../components/Input";
+import { REACT_API_URL } from "../../../utils/http";
 
 const UserSchema = yup
   .object({
@@ -49,7 +49,7 @@ export default function UserUpdate() {
   }, [user, setValue]);
   const onSubmit = (data) => {
     axios
-      .put(`http://localhost:8080/users/update/${id}`, data)
+      .put(`${REACT_API_URL}/users/update/${id}`, data)
       .then(function (response) {
         toast.success("CHỈNH SỬA SẢN PHẨM THÀNH CÔNG");
         naviagte("/admin/user");

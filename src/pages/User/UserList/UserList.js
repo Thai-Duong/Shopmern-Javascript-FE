@@ -4,17 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { setUser } from "../../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { REACT_API_URL } from "../../../utils/http";
 
 export default function UserList() {
   const user = useSelector((state) => state.user.users);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const getUser = async () => {
-    const res = await axios.get("http://localhost:8080/users/getAll");
+    const res = await axios.get(`${REACT_API_URL}/users/getAll`);
     dispatch(setUser(res.data));
   };
   const deleteUser = async (id) => {
-    await axios.delete(`http://localhost:8080/users/delete/${id}`);
+    await axios.delete(`${REACT_API_URL}/users/delete/${id}`);
     toast.success("Xóa Tài Khoản Thành Công");
     navigate("/admin");
   };

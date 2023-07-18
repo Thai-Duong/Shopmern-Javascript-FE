@@ -1,14 +1,2 @@
-import axios from "axios";
-class Http {
-  constructor() {
-    this.instance = axios.create({
-      baseURL: "http://localhost:8080/",
-      timeout: 10000,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-}
-const http = new Http().instance;
-export default http;
+// # REACT_API = https:shop-backend-x8vw.onrender.com
+export const REACT_API_URL = "https://shop-backend-x8vw.onrender.com";

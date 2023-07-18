@@ -6,6 +6,7 @@ import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { REACT_API_URL } from "../../utils/http";
 
 const RegisterSchema = yup
   .object({
@@ -29,9 +30,8 @@ export default function Register() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
     axios
-      .post("http://localhost:8080/users/register", data)
+      .post(`${REACT_API_URL}/users/register`, data)
       .then(function (response) {
         if (response.data.status == "ERR") {
           toast.error(response.data.message);

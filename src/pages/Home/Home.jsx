@@ -3,12 +3,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Product from "../../components/Product/Product";
 import { setProduct } from "../../redux/productSlice";
+import { REACT_API_URL } from "../../utils/http";
 
 export default function Home() {
   const product = useSelector((state) => state.product.productList);
   const dispatch = useDispatch();
   const getProduct = async (data) => {
-    const res = await axios.get("http://localhost:8080/products/getAll", data);
+    const res = await axios.get(`${REACT_API_URL}/products/getAll`, data);
     dispatch(setProduct(res.data));
   };
   useEffect(() => {

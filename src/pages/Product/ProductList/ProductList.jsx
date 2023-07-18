@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProduct } from "../../../redux/productSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { REACT_API_URL } from "../../../utils/http";
 
 export default function ProductList() {
   const product = useSelector((state) => state.product.productList);
@@ -11,11 +12,11 @@ export default function ProductList() {
 
   const dispatch = useDispatch();
   const getProduct = async (data) => {
-    const res = await axios.get("http://localhost:8080/products/getAll", data);
+    const res = await axios.get(`${REACT_API_URL}/products/getAll`, data);
     dispatch(setProduct(res.data));
   };
   const deleteProduct = async (id) => {
-    await axios.delete(`http://localhost:8080/products/delete/${id}`);
+    await axios.delete(`${REACT_API_URL}/products/delete/${id}`);
     toast.success("Xóa sản phẩm Thành Công");
     navigate("/admin");
   };

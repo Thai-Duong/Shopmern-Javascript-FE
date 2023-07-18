@@ -2,11 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../../../utils/auth";
+import { REACT_API_URL } from "../../../utils/http";
 
 export default function OrderList() {
   const [order, setOrder] = useState();
   const getOrder = async () => {
-    const res = await axios.get("http://localhost:8080/order/getAll");
+    const res = await axios.get(`${REACT_API_URL}/order/getAll`);
     setOrder(res.data);
   };
   useEffect(() => {

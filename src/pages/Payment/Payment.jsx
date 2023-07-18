@@ -8,6 +8,7 @@ import Input from "../../components/Input";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { formatCurrency } from "../../utils/auth";
+import { REACT_API_URL } from "../../utils/http";
 
 const paymentSchema = yup
   .object({
@@ -35,7 +36,7 @@ export default function Payment() {
   const onSubmit = async (data) => {
     const orther = { ...data, cart, totalAmount };
     await axios
-      .post("http://localhost:8080/order", orther)
+      .post(`${REACT_API_URL}/order`, orther)
       .then(function (response) {
         toast.success("Mua Hàng Thành Công");
         navigate("/");

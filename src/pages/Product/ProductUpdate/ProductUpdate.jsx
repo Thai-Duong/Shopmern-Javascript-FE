@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { REACT_API_URL } from "../../../utils/http";
 
 const ProductSchema = yup
   .object({
@@ -46,7 +47,7 @@ export default function ProductUpdate() {
   }, [product, setValue]);
   const onSubmit = async (data) => {
     await axios
-      .put(`http://localhost:8080/products/update/${id}`, data)
+      .put(`${REACT_API_URL}/products/update/${id}`, data)
       .then(function (response) {
         console.log(response);
         toast.success("CHỈNH SỬA SẢN PHẨM THÀNH CÔNG");

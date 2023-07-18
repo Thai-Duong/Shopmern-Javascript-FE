@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { REACT_API_URL } from "../../../utils/http";
 
 const ProductSchema = yup
   .object({
@@ -27,7 +28,7 @@ export default function Product() {
   const onSubmit = (data) => {
     console.log(data);
     axios
-      .post("http://localhost:8080/products/create", data)
+      .post(`${REACT_API_URL}/products/create`, data)
       .then(function (response) {
         toast.success("Create product success");
       })
