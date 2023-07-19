@@ -61,6 +61,8 @@ export default function UserUpdate() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="my-5 text-2xl">Chỉnh sửa tài khoản</div>
+
       <div className="md:w-[400px] md:mx-auto w-[350px] mx-auto my-5">
         <div className="flex flex-col gap-3">
           <label htmlFor="name">Họ Tên</label>
@@ -111,9 +113,13 @@ export default function UserUpdate() {
           <p className="text-sm text-red-500"> Vui lòng điền vào trường này</p>
         )}
 
-        <div className="flex gap-3 ">
-          <Input name="isAdmin" type="checkbox" control={control}></Input>
-          <label htmlFor="">Cấp quyền Admin</label>
+        <div className="flex gap-3 mb-3">
+          <div className="flex">
+            <Input name="isAdmin" type="checkbox" control={control} />
+            <label htmlFor="isAdmin" className="ml-2 ">
+              Admin
+            </label>
+          </div>
         </div>
         {errors.isAdmin && (
           <p className="text-sm text-red-500"> Vui lòng điền vào trường này</p>

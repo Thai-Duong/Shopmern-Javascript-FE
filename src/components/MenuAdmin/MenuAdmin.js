@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 export default function MenuAdmin() {
   return (
-    <div className="text-black ">
-      <div className="p-4 bg-white rounded-lg">
+    <div className="flex h-full ">
+      <div className="p-4 rounded-lg">
         <Link to="" className="flex items-center font-bold ">
           Danh Mục Quản Lý
         </Link>

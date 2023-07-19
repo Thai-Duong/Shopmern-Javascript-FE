@@ -60,6 +60,8 @@ export default function ProductUpdate() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="my-5 text-2xl">Chỉnh sửa sản phẩm</div>
+
       <div className="md:w-[400px] md:mx-auto w-[350px] mx-auto my-5">
         <div className="flex flex-col gap-3">
           <label htmlFor="name">Tên sản phẩm</label>

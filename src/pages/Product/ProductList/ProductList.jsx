@@ -24,48 +24,38 @@ export default function ProductList() {
     getProduct();
   }, []);
   return (
-    <div className="px-5">
+    <div className="m-5">
       <div className="my-5 text-2xl">Danh Sách Sản Phẩm</div>
       <Link
-        className="flex my-5 text-xl align-center"
+        className="px-4 py-2 mb-3 text-xl border align-center"
         to={"/admin/products/add"}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-8 h-8 mr-3"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <div>Thêm Sản Phẩm</div>
+        Thêm Sản Phẩm
       </Link>
-      <table className="w-full p-5 text-center table-auto ">
+      <table className="w-full mt-5 text-center border border-collapse border-slate-800">
         <thead>
-          <tr>
-            <th>Ảnh</th>
-            <th>Tên</th>
-            <th>Giá</th>
-            <th>Tool</th>
+          <tr className="text-white bg-gray-500">
+            <th className="p-2 border border-slate-600">Ảnh</th>
+            <th className="p-2 border border-slate-600">Tên</th>
+            <th className="p-2 border border-slate-600">Giá</th>
+            <th className="p-2 border border-slate-600">Tool</th>
           </tr>
         </thead>
         <tbody>
           {product &&
             product.map((item) => (
               <tr key={item._id} className="border ">
-                <td>
-                  <img className="w-20 h-15" src={item.image} alt="" />
+                <td className="p-0 border border-slate-600">
+                  <img
+                    className="block w-full h-[100px]"
+                    src={item.image}
+                    alt=""
+                  />
                 </td>
-                <td className="px-3">{item.name}</td>
-                <td>{item.price}</td>
-                <td>
-                  <div className="flex gap-2 ml-5">
+                <td className="p-2 border border-slate-600">{item.name}</td>
+                <td className="p-2 border border-slate-600">{item.price}</td>
+                <td className="p-2 border border-slate-600">
+                  <div className="flex gap-2 ml-4">
                     <Link onClick={() => deleteProduct(item._id)}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

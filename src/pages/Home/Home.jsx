@@ -18,15 +18,13 @@ export default function Home() {
 
   return (
     <div className="px-4 mx-auto max-w-7xl">
-      <div className="">
-        <div className="grid grid-cols-2 gap-3 mt-6 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
-          {product &&
-            product.map((item) => (
-              <div className="col-span-1" key={item._id}>
-                <Product item={item} />
-              </div>
-            ))}
-        </div>
+      <div className="grid grid-cols-2 gap-3 mt-6 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
+        {product &&
+          product.map((item) => (
+            <div className="col-span-1" key={item._id}>
+              <Product item={item} />
+            </div>
+          ))}
       </div>
     </div>
   );

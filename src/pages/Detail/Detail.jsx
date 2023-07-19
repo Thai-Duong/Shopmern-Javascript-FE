@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { addToCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
 import { formatCurrency } from "../../utils/auth";
@@ -10,12 +10,17 @@ import { formatCurrency } from "../../utils/auth";
 export default function Detail() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigator = useNavigate();
   const productList = useSelector((state) => state.product.productList);
+  const user = useSelector((state) => state.user.profile);
   const product = productList.filter((el) => el._id === id)[0];
-
   const hanldeAddToCart = (item) => {
-    dispatch(addToCart(item));
-    toast.success("Thêm vào giỏ hàng thành công");
+    if (user) {
+      dispatch(addToCart(item));
+      toast.success("Thêm vào giỏ hàng thành công");
+    } else {
+      navigator("/login");
+    }
   };
   if (!product) return null;
   return (

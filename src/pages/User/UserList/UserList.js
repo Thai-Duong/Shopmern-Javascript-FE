@@ -27,29 +27,34 @@ export default function UserList() {
   return (
     <div className="px-5">
       <div className="my-5 text-2xl">Danh Sách Tài Khoản Người Dùng</div>
-
-      <table className="w-full p-5 text-center table-auto ">
+      <table className="w-full border border-collapse border-slate-800">
         <thead>
-          <tr>
-            <th>Tên</th>
-            <th>Email</th>
-            <th>Ngày Tạo</th>
-            <th>Địa Chỉ</th>
-            <th>SDT</th>
-            <th></th>
+          <tr className="text-white bg-gray-500">
+            <th className="p-2 border border-slate-600">Tên</th>
+            <th className="p-2 border border-slate-600">Email</th>
+            <th className="p-2 border border-slate-600">Ngày Tạo</th>
+            <th className="p-2 border border-slate-600">Địa Chỉ</th>
+            <th className="p-2 border border-slate-600">SDT</th>
+            <th className="p-2 border border-slate-600"></th>
           </tr>
         </thead>
         <tbody>
           {user &&
             user.map((item) => (
               <tr key={item._id} className="border ">
-                <td>{item.name}</td>
-                <td className="px-3">{item.email}</td>
-                <td>{item.createdAt}</td>
-                <td>{item.createdAt}</td>
-                <td>{item.createdAt}</td>
-                <td>
-                  <div className="flex gap-2 ml-5">
+                <td className="p-2 border border-slate-600">{item.name}</td>
+                <td className="p-2 border border-slate-600">{item.email}</td>
+                <td className="p-2 border border-slate-600">
+                  {item.createdAt}
+                </td>
+                <td className="p-2 border border-slate-600">
+                  {item.createdAt}
+                </td>
+                <td className="p-2 border border-slate-600">
+                  {item.createdAt}
+                </td>
+                <td className="p-2 border border-slate-600">
+                  <div className="flex gap-2 ">
                     <Link onClick={() => deleteUser(item._id)}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

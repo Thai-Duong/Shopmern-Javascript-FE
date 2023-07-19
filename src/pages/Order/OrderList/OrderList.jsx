@@ -3,12 +3,16 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../../../utils/auth";
 import { REACT_API_URL } from "../../../utils/http";
+import { useDispatch, useSelector } from "react-redux";
+import { setOrder } from "../../../redux/orderSlice";
 
 export default function OrderList() {
-  const [order, setOrder] = useState();
+  const order = useSelector((state) => state.order.order);
+  const dispatch = useDispatch();
+
   const getOrder = async () => {
     const res = await axios.get(`${REACT_API_URL}/order/getAll`);
-    setOrder(res.data);
+    dispatch(setOrder(res.data));
   };
   useEffect(() => {
     getOrder();
@@ -17,30 +21,34 @@ export default function OrderList() {
     <div className="px-5">
       <div className="my-5 text-2xl">Danh Sách Đơn Hàng</div>
 
-      <table className="w-full p-5 text-center table-auto ">
+      <table className="w-full mt-5 text-center border border-collapse border-slate-800">
         <thead>
-          <tr>
-            <th>Tên</th>
-            <th>Địa chỉ</th>
-            <th>SDT</th>
-            <th>Email</th>
-            <th>Giá</th>
-            <th>Thời gian đặt</th>
-            <th>Tool</th>
+          <tr className="text-white bg-gray-500">
+            <th className="p-2 border border-slate-600">Tên</th>
+            <th className="p-2 border border-slate-600"> Địa chỉ</th>
+            <th className="p-2 border border-slate-600">SDT</th>
+            <th className="p-2 border border-slate-600">Email</th>
+            <th className="p-2 border border-slate-600">Giá</th>
+            <th className="p-2 border border-slate-600">Thời gian đặt</th>
+            <th className="p-2 border border-slate-600">Tool</th>
           </tr>
         </thead>
         <tbody>
           {order &&
-            order.data.map((item) => (
+            order.map((item) => (
               <tr key={item._id} className="border">
-                <td>{item.name}</td>
-                <td>{item.address}</td>
-                <td>{item.phone}</td>
-                <td>{item.email}</td>
-                <td>{formatCurrency(item.totalAmount)}</td>
-                <td>{item.updatedAt}</td>
-                <td>
-                  <div className="flex gap-2 ml-5">
+                <td className="p-2 border border-slate-600">{item.name}</td>
+                <td className="p-2 border border-slate-600">{item.address}</td>
+                <td className="p-2 border border-slate-600">{item.phone}</td>
+                <td className="p-2 border border-slate-600">{item.email}</td>
+                <td className="p-2 border border-slate-600">
+                  {formatCurrency(item.totalAmount)}
+                </td>
+                <td className="p-2 border border-slate-600">
+                  {item.updatedAt}
+                </td>
+                <td className="p-2 border border-slate-600">
+                  <div className="flex gap-2 ml-2">
                     <Link to={`/orders/detail/${item._id}`}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
