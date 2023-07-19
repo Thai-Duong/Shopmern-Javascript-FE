@@ -32,7 +32,7 @@ export default function Login() {
       axios
         .post(`${REACT_API_URL}/users/login`, data)
         .then(function (response) {
-          if (response.data.status === "ERR") {
+          if (response.data.status == "ERR") {
             toast.error(response.data.message);
           } else {
             dispatch(login(response.data));
