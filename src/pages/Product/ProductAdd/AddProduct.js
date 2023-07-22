@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { REACT_API_URL } from "../../../utils/http";
+import { useNavigate } from "react-router-dom";
 
 const ProductSchema = yup
   .object({
@@ -24,13 +25,13 @@ export default function Product() {
   } = useForm({
     resolver: yupResolver(ProductSchema),
   });
-
+  const navigate = useNavigate();
   const onSubmit = (data) => {
-    console.log(data);
     axios
       .post(`${REACT_API_URL}/products/create`, data)
       .then(function (response) {
         toast.success("Create product success");
+        navigate("/admin/products");
       })
       .catch(function (error) {
         console.log(error);

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Product from "../../components/Product/Product";
 import { setProduct } from "../../redux/productSlice";
 import { REACT_API_URL } from "../../utils/http";
-
 export default function Home() {
   const product = useSelector((state) => state.product.productList);
   const dispatch = useDispatch();

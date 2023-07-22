@@ -1,19 +1,19 @@
-import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { addToCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
-import { formatCurrency } from "../../utils/auth";
-// import { addToCart } from "../../redux/productSlice";
+import { addToCart } from "../../redux/cartSlice";
+import { formatCurrency, getIdFormNameId } from "../../utils/utils";
 
 export default function Detail() {
   const { id } = useParams();
+  const nameId = getIdFormNameId(id);
+  console.log(id);
   const dispatch = useDispatch();
   const navigator = useNavigate();
   const productList = useSelector((state) => state.product.productList);
   const user = useSelector((state) => state.user.profile);
-  const product = productList.filter((el) => el._id === id)[0];
+  const product = productList.filter((el) => el._id === nameId)[0];
   const hanldeAddToCart = (item) => {
     if (user) {
       dispatch(addToCart(item));

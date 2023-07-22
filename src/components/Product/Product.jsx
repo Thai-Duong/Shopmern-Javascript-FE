@@ -1,10 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { formatCurrency } from "../../utils/auth";
+import { formatCurrency, generateNameId } from "../../utils/utils";
 
 export default function Product({ item }) {
   return (
-    <Link to={`${"/products/"}${item._id}`}>
+    <Link
+      to={`${"/products/"}${generateNameId({
+        name: item.name,
+        id: item._id,
+      })}`}
+    >
       <div className="rounded-sm bg-white shadow transition-transform duration-100 hover:translate-y-[-0.0625rem] hover:shadow-md">
         <div className="relative w-full pt-[100%]">
           <img

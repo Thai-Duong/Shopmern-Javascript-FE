@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { formatCurrency } from "../../../utils/auth";
 import { REACT_API_URL } from "../../../utils/http";
+import { formatCurrency } from "../../../utils/utils";
 
 export default function OrderDetail() {
   const [order, setOrderDetail] = useState();

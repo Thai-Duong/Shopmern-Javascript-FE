@@ -5,6 +5,3 @@ export const getProfile = () => {
 export const setProfile = (user) => {
   localStorage.setItem("user", JSON.stringify(user));
 };
-export function formatCurrency(currency) {
-  return new Intl.NumberFormat("de-DE").format(currency);
-}

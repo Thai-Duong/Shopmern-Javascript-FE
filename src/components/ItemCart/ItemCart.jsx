@@ -1,5 +1,5 @@
 import React from "react";
-import { formatCurrency } from "../../utils/auth";
+import { formatCurrency } from "../../utils/utils";
 
 export default function ItemCart({
   item,

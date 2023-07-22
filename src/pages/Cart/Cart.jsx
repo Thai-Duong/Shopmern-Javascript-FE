@@ -8,7 +8,7 @@ import {
   descreaseCart,
   increaseCart,
 } from "../../redux/cartSlice";
-import { formatCurrency } from "../../utils/auth";
+import { formatCurrency } from "../../utils/utils";
 
 export default function Cart() {
   const { cart, totalAmount } = useSelector((state) => state.cart);
@@ -47,11 +47,11 @@ export default function Cart() {
               Xóa Tất Cả Sản Phẩm
             </button>
             <div className="flex">
-              <div className="text-2xl my-auto mr-5">
+              <div className="my-auto mr-5 text-2xl">
                 Thành Tiền: {formatCurrency(totalAmount)}
               </div>
               <Link
-                className="text-xl my-auto bg-blue-300 border px-3 py-2"
+                className="px-3 py-2 my-auto text-xl bg-blue-300 border"
                 to="/payment"
               >
                 Thanh Toán

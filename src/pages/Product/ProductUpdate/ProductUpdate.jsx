@@ -51,7 +51,7 @@ export default function ProductUpdate() {
       .then(function (response) {
         console.log(response);
         toast.success("CHỈNH SỬA SẢN PHẨM THÀNH CÔNG");
-        naviagte("/admin/product");
+        naviagte("/admin/products");
       })
       .catch(function (error) {
         toast.success(error);

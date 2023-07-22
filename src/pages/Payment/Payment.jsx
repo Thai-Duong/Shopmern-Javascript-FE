@@ -7,8 +7,8 @@ import * as yup from "yup";
 import Input from "../../components/Input";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { formatCurrency } from "../../utils/auth";
 import { REACT_API_URL } from "../../utils/http";
+import { formatCurrency } from "../../utils/utils";
 
 const paymentSchema = yup
   .object({

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { Button, Popover } from "antd";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import Popover from "../Popover/Popover";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logout } from "../../redux/userSlice";
 
@@ -37,54 +37,43 @@ export default function Header() {
           </Link>
         </div>
         <div className="flex items-center justify-end col-span-9 gap-3">
-          <div className="flex justify-end ">
-            <div className="flex items-center rounded-lg ">
-              <Link
-                to="/"
-                className="flex items-center justify-center mx-3 uppercase"
-              >
-                Trang Chủ
-              </Link>
-            </div>
-
-            {userData ? (
-              <Popover
-                rederpopover={
-                  <div className="border">
-                    <Link
-                      to="/profile"
-                      className="block w-full px-3 py-2 text-left bg-white"
-                    >
-                      Tài khoản của tôi
-                    </Link>
-
-                    <button
-                      className="block w-full px-3 py-2 text-left bg-white"
-                      onClick={handleLogout}
-                    >
-                      Đăng Xuất
-                    </button>
-                  </div>
-                }
-              >
-                <div className="flex items-center w-auto h-5 m-3 uppercase">
+          <div className="flex justify-end">
+            <Link
+              to="/"
+              className="flex items-center justify-center mx-3 mt-2 uppercase"
+            >
+              Trang Chủ
+            </Link>
+            <Popover
+              title={
+                <button
+                  className="block w-full px-3 py-2 text-left bg-white"
+                  onClick={handleLogout}
+                >
+                  Đăng Xuất
+                </button>
+              }
+            >
+              {userData ? (
+                <div className="flex items-center w-auto h-5 mx-5 mt-4 uppercase">
                   {userData.name}
                 </div>
-              </Popover>
-            ) : (
-              <div className="flex items-center rounded-lg ">
-                <Link
-                  to="/login"
-                  className="flex items-center justify-center mx-3"
-                >
-                  <img
-                    src="https://salt.tikicdn.com/ts/upload/07/d5/94/d7b6a3bd7d57d37ef6e437aa0de4821b.png"
-                    alt="header_header_account_img"
-                    className="w-6 h-6 mr-2"
-                  />
-                </Link>
-              </div>
-            )}
+              ) : (
+                <div className="flex items-center mt-1 rounded-lg ">
+                  <Link
+                    to="/login"
+                    className="flex items-center justify-center mx-3"
+                  >
+                    <img
+                      src="https://salt.tikicdn.com/ts/upload/07/d5/94/d7b6a3bd7d57d37ef6e437aa0de4821b.png"
+                      alt="header_header_account_img"
+                      className="w-6 h-6 mr-2"
+                    />
+                  </Link>
+                </div>
+              )}
+            </Popover>
+
             <Link
               to="/cart"
               className="relative p-3 text-xl fa-solid fa-cart-shopping "
