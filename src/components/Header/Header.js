@@ -1,4 +1,4 @@
-import { Button, Popover } from "antd";
+import { Popover } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -13,7 +13,20 @@ export default function Header() {
     dispatch(logout());
     toast.success("Logout successfully");
   };
-
+  const items = [
+    {
+      key: "1",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
+          1st menu item
+        </a>
+      ),
+    },
+  ];
   return (
     <div>
       <div className="bg-[#0538e1] px-10 font-bold grid grid-cols-12 pb-3 text-white mb-5 ">
@@ -44,6 +57,7 @@ export default function Header() {
             >
               Trang Chủ
             </Link>
+
             <Popover
               title={
                 <button

@@ -9,6 +9,7 @@ import {
   increaseCart,
 } from "../../redux/cartSlice";
 import { formatCurrency } from "../../utils/utils";
+import { Button } from "antd";
 
 export default function Cart() {
   const { cart, totalAmount } = useSelector((state) => state.cart);
@@ -40,12 +41,14 @@ export default function Cart() {
               ></ItemCart>
             ))}
           <div className="flex justify-between">
-            <button
-              className="p-3 text-white bg-red-500 border"
+            <Button
+              type="primary"
+              danger
               onClick={() => hanldeClearCart()}
+              size="large"
             >
               Xóa Tất Cả Sản Phẩm
-            </button>
+            </Button>
             <div className="flex">
               <div className="my-auto mr-5 text-2xl">
                 Thành Tiền: {formatCurrency(totalAmount)}

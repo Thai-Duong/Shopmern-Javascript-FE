@@ -1,7 +1,7 @@
+import { Card } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import { formatCurrency, generateNameId } from "../../utils/utils";
-
 export default function Product({ item }) {
   return (
     <Link
@@ -10,22 +10,28 @@ export default function Product({ item }) {
         id: item._id,
       })}`}
     >
-      <div className="rounded-sm bg-white shadow transition-transform duration-100 hover:translate-y-[-0.0625rem] hover:shadow-md">
-        <div className="relative w-full pt-[100%]">
+      <Card
+        hoverable
+        style={{
+          width: 200,
+          height: 300,
+        }}
+        cover={
           <img
-            className="absolute top-0 left-0 object-cover w-full h-full bg-white"
+            alt="photoProduct"
             src={item.image}
-            alt=""
+            className="h-[200px] border"
           />
+        }
+      >
+        <div className="min-h-[1.5rem] text-sm line-clamp-1 font-bold">
+          {item.name}
         </div>
-        <div className="p-2 overflow-hiden ">
-          <div className="min-h-[1.5rem] text-sm line-clamp-1">{item.name}</div>
-          <div className="mt-2 ml-1 truncate text-orangw">
-            <span className="text-xs">₫</span>
-            <span>{formatCurrency(item.price)}</span>
-          </div>
+        <div className="mt-2 ml-1 truncate text-orangw">
+          <span>{formatCurrency(item.price)}</span>
+          <span className="m-1 text-sm">₫</span>
         </div>
-      </div>
+      </Card>
     </Link>
   );
 }
