@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -17,6 +17,9 @@ export default function LayoutAdmin({ children }) {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  useEffect(() => {
+    if (!userData) return null;
+  });
   return (
     <Layout className="p-0">
       <Sider trigger={null} collapsible collapsed={collapsed}>

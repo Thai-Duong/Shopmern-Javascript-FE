@@ -34,7 +34,7 @@ export default function Register() {
       .post(`${REACT_API_URL}/users/register`, data)
       .then(function (response) {
         if (response.data.status == "ERR") {
-          toast.error(response.data.message);
+          return toast.error(response.data.message);
         }
         toast.success("Register success");
         navigate("/");

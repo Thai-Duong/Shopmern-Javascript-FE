@@ -6,10 +6,10 @@ function App() {
   const routerElement = useRouteElement();
 
   return (
-    <div>
+    <>
       {routerElement}
       <ToastContainer />
-    </div>
+    </>
   );
 }
 
