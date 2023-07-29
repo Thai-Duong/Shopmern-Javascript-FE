@@ -13,17 +13,15 @@ import { formatCurrency } from "../../utils/utils";
 const paymentSchema = yup
   .object({
     name: yup.string().required(),
-    email: yup.string().email().required(),
     phone: yup.string().required(),
     address: yup.string().required(),
   })
   .required();
 
 export default function Payment() {
-  const { cart, totalAmount, cartQuantity } = useSelector(
-    (state) => state.cart
-  );
-
+  const { cart, totalAmount } = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user.profile);
+  console.log(user);
   const {
     control,
     handleSubmit,
@@ -34,7 +32,7 @@ export default function Payment() {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    const orther = { ...data, cart, totalAmount };
+    const orther = { ...data, cart, totalAmount, user };
     await axios
       .post(`${REACT_API_URL}/order`, orther)
       .then(function (response) {
@@ -80,7 +78,7 @@ export default function Payment() {
           <p className="mb-4 text-xl font-medium">Thông Tin Thanh Toán</p>
           <div className="">
             <div className="flex flex-col gap-3">
-              <label htmlFor="name">Họ Tên</label>
+              <label htmlFor="name">Họ Tên Người Nhận</label>
               <Input
                 name="name"
                 type="text"
@@ -93,22 +91,9 @@ export default function Payment() {
                 Vui lòng điền vào trường này
               </p>
             )}
+
             <div className="flex flex-col gap-3">
-              <label htmlFor="name">Email</label>
-              <Input
-                name="email"
-                type="email"
-                control={control}
-                placeholder="Email của bạn"
-              ></Input>
-            </div>
-            {errors.email && (
-              <p className="text-sm text-red-500">
-                Vui lòng điền vào trường này
-              </p>
-            )}
-            <div className="flex flex-col gap-3">
-              <label htmlFor="adress">Địa Chỉ</label>
+              <label htmlFor="adress">Địa Chỉ Nhận Hàng</label>
               <Input
                 name="address"
                 type="text"
@@ -122,7 +107,7 @@ export default function Payment() {
               </p>
             )}
             <div className="flex flex-col gap-3">
-              <label htmlFor="phone">Phone</label>
+              <label htmlFor="phone">Số Điện Thoại Người Nhận</label>
               <Input
                 name="phone"
                 type="text"
@@ -137,7 +122,7 @@ export default function Payment() {
             )}
 
             <div className="flex items-center justify-between mt-6">
-              <p className="text-sm font-medium text-gray-900">Tổng</p>
+              <p className="text-sm font-medium text-gray-900">Thành Tiền</p>
               <p className="text-2xl font-semibold text-gray-900">
                 {formatCurrency(totalAmount)} ₫
               </p>

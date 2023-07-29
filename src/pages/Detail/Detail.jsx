@@ -11,9 +11,9 @@ export default function Detail() {
   console.log(id);
   const dispatch = useDispatch();
   const navigator = useNavigate();
-  const productList = useSelector((state) => state.product.productList);
+  const products = useSelector((state) => state.product.products);
   const user = useSelector((state) => state.user.profile);
-  const product = productList.filter((el) => el._id === nameId)[0];
+  const product = products.filter((el) => el._id === nameId)[0];
   const hanldeAddToCart = (item) => {
     if (user) {
       dispatch(addToCart(item));

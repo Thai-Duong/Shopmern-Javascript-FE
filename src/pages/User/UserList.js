@@ -1,29 +1,32 @@
-import { Space, Table, Modal } from "antd";
+import { Modal, Space, Table } from "antd";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { setUser } from "../../../redux/userSlice";
-import { REACT_API_URL } from "../../../utils/http";
+import { REACT_API_URL } from "../../utils/http";
+import { setUser } from "../../redux/userSlice";
+import UpdateUser from "../../components/UpdateUser";
+import Delete from "../../components/Delete";
 
 export default function UserList() {
   const user = useSelector((state) => state.user.users);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const getUser = async () => {
-    const res = await axios.get(`${REACT_API_URL}/users/getAll`);
-    dispatch(setUser(res.data));
-  };
   const deleteUser = async (id) => {
     await axios.delete(`${REACT_API_URL}/users/delete/${id}`);
     toast.success("Xóa Tài Khoản Thành Công");
     navigate("/admin");
   };
+  const dispatch = useDispatch();
+
+  const getUser = async () => {
+    const res = await axios.get(`${REACT_API_URL}/users/getAll`);
+    dispatch(setUser(res.data));
+  };
+
   useEffect(() => {
     getUser();
   }, []);
-
   const columns = [
     {
       title: "STT",
@@ -58,23 +61,8 @@ export default function UserList() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Modal onOk={() => deleteUser(record._id)}></Modal>
-          <Link to={`/users/update/${record._id}`}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-              />
-            </svg>
-          </Link>
+          <Delete onOk={() => deleteUser(record._id)} />
+          <UpdateUser id={record._id} />
         </Space>
       ),
     },

@@ -1,79 +1,135 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
+  ShoppingCartOutlined,
+  ShoppingOutlined,
   UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Button, theme } from "antd";
+import { Card, Space, Statistic } from "antd";
+import axios from "axios";
+import {
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  Title,
+  Tooltip,
+} from "chart.js";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setOrder } from "../../redux/orderSlice";
+import { setProduct } from "../../redux/productSlice";
+import { setUser } from "../../redux/userSlice";
+import { REACT_API_URL } from "../../utils/http";
 
-const { Header, Sider, Content } = Layout;
-export default function Admin({ children }) {
-  const userData = useSelector((state) => state.user.profile);
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "bot",
+    },
+    title: {
+      display: true,
+      text: "Chart.js Bar Chart",
+    },
+  },
+};
+
+export default function Admin() {
+  const order = useSelector((state) => state.order.order);
+  const user = useSelector((state) => state.user.users);
+  const product = useSelector((state) => state.product.products);
+  const dispatch = useDispatch();
+  const getOrder = async () => {
+    const res = await axios.get(`${REACT_API_URL}/order/getAll`);
+    dispatch(setOrder(res.data));
+  };
+  const getUser = async () => {
+    const res = await axios.get(`${REACT_API_URL}/users/getAll`);
+    dispatch(setUser(res.data));
+  };
+  const getProduct = async (data) => {
+    const res = await axios.get(`${REACT_API_URL}/products/getAll`, data);
+    dispatch(setProduct(res.data));
+  };
   useEffect(() => {
-    if (!userData) return null;
-  });
+    getOrder();
+    getUser();
+    getProduct();
+  }, []);
+  // const labels = order.map((order) => {
+  //   return order.name;
+  // });
+  // const data = order.map((order) => {
+  //   return order.totalAmount;
+  // });
+  // const dataSourse = {
+  //   labels,
+  //   datasets: [
+  //     {
+  //       label: "Số tiền",
+  //       data: data,
+  //       backgroundColor: "rgba(255, 206, 86, 0.2)",
+  //     },
+  //   ],
+  // };
   return (
-    <Layout className="p-0">
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <UserOutlined />,
-              label: <Link to={"/admin/users"}>Quản lý Người Dùng</Link>,
-            },
-            {
-              key: "2",
-              icon: <VideoCameraOutlined />,
-              label: <Link to={"/admin/products"}>Quản lý Sản Phẩm </Link>,
-            },
-            {
-              key: "3",
-              icon: <UploadOutlined />,
-              label: <Link to={"/admin/orders"}>Quản Lý Đơn Hàng </Link>,
-            },
-          ]}
-        />
-      </Sider>
-      <Layout>
-        <Header
-          style={{ padding: 0, background: colorBgContainer }}
-          className="flex justify-between"
-        >
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-            }}
-          />
-          <div className="mr-5">{userData.email}</div>
-        </Header>
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 10,
-            minHeight: 280,
-            background: colorBgContainer,
-          }}
-        >
-          {children}
-        </Content>
-      </Layout>
-    </Layout>
+    <div className="">
+      <div className="">Dashboard</div>
+      <Space>
+        <Card>
+          <Space direction="horizontal">
+            <ShoppingCartOutlined
+              style={{
+                color: "green",
+                backgroundColor: "rgba(0,255,0,0.25)",
+                borderRadius: 20,
+                fontSize: 24,
+                padding: 8,
+              }}
+            />
+            <Statistic title="Đơn Hàng" value={order.length} />
+          </Space>
+        </Card>
+        <Card>
+          <Space direction="horizontal">
+            <ShoppingOutlined
+              style={{
+                color: "black",
+                backgroundColor: "rgba(0,255,0,0.25)",
+                borderRadius: 20,
+                fontSize: 24,
+                padding: 8,
+              }}
+            />
+            <Statistic title="Sản Phẩm" value={product.length} />
+          </Space>
+        </Card>
+        <Card>
+          <Space direction="horizontal">
+            <UserOutlined
+              style={{
+                color: "blue",
+                backgroundColor: "rgba(0,255,0,0.25)",
+                borderRadius: 20,
+                fontSize: 24,
+                padding: 8,
+              }}
+            />
+            <Statistic title="Tài Khoản" value={user.length} />
+          </Space>
+        </Card>
+      </Space>
+      {/* <div className="">
+        <Bar options={options} data={dataSourse} />;
+      </div> */}
+    </div>
   );
 }
