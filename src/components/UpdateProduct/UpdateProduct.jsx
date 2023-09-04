@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { REACT_API_URL } from "../../utils/http";
 import Input from "../Input";
+import Textarea from "../Textarea";
 
 const ProductSchema = yup
   .object({
@@ -124,12 +125,12 @@ export default function UpdateProduct({ id }) {
 
             <div className="flex flex-col gap-3">
               <label htmlFor="description">Chi tiết</label>
-              <Input
+              <Textarea
                 name="description"
                 type="text"
                 control={control}
                 placeholder="Chi tiết sản phẩm"
-              ></Input>
+              ></Textarea>
             </div>
             {errors.description && (
               <p className="text-sm text-red-500">

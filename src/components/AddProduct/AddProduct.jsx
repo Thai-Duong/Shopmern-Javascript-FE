@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { REACT_API_URL } from "../../utils/http";
 import Input from "../Input";
+import Textarea from "../Textarea";
+import { useNavigate } from "react-router-dom";
 
 const ProductSchema = yup
   .object({
@@ -105,12 +107,12 @@ export default function AddProduct() {
 
             <div className="flex flex-col gap-3">
               <label htmlFor="description">Chi tiết</label>
-              <Input
+              <Textarea
                 name="description"
                 type="text"
                 control={control}
                 placeholder="Chi tiết sản phẩm"
-              ></Input>
+              ></Textarea>
             </div>
             {errors.description && (
               <p className="text-sm text-red-500">
