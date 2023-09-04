@@ -38,12 +38,12 @@ export default function Header() {
         </div>
         <div className="flex items-center justify-end col-span-9 gap-3">
           <div className="flex justify-end">
-            <Link
+            {/* <Link
               to="/"
               className="flex items-center justify-center mx-3 mt-2 uppercase"
             >
               Trang Chủ
-            </Link>
+            </Link> */}
 
             <Popover
               title={

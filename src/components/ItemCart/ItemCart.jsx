@@ -10,9 +10,9 @@ export default function ItemCart({
   return (
     <div
       key={item.id}
-      className="grid items-center grid-cols-6 gap-2 p-2 mb-2 border rounded-lg md:gap-7"
+      className="grid items-center grid-cols-6 gap-2 mb-2 border rounded-lg md:gap-7"
     >
-      <img src={item.image} alt="" className="w-[200px] h-[100px]" />
+      <img src={item.image} alt="" className="w-full" />
       <div className="text-sm">{item.name}</div>
       <div className="text-sm">{formatCurrency(item.price)}</div>
       <div className="flex">

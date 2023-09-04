@@ -29,7 +29,7 @@ export default function Cart() {
   return (
     <div className="px-4 mx-auto mt-10 max-w-7xl">
       {cart.length > 0 ? (
-        <div className="px-[100px]">
+        <div className="xl:px-[100px]">
           {cart.length > 0 &&
             cart.map((item) => (
               <ItemCart
@@ -50,11 +50,11 @@ export default function Cart() {
               Xóa Tất Cả Sản Phẩm
             </Button>
             <div className="flex">
-              <div className="my-auto mr-5 text-2xl">
+              <div className="my-auto mr-3 text-xl xl:text-2xl">
                 Thành Tiền: {formatCurrency(totalAmount)}
               </div>
               <Link
-                className="px-3 py-2 my-auto text-xl bg-blue-300 border"
+                className="px-3 py-2 my-auto text-sm bg-blue-300 border xl:text-xl"
                 to="/payment"
               >
                 Thanh Toán
