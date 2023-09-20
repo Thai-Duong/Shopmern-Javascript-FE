@@ -1,5 +1,7 @@
 import React from "react";
 import { useController } from "react-hook-form";
+import "react-quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
 
 export default function Textarea({ control, ...props }) {
   const { field } = useController({
@@ -8,10 +10,12 @@ export default function Textarea({ control, ...props }) {
     defaultValue: "",
   });
   return (
-    <textarea
+    <ReactQuill
       {...field}
       {...props}
-      className="w-full h-[170px] px-4 py-3 pl-5 mb-3 text-sm border border-gray-200 rounded-md shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-    ></textarea>
+      theme="snow"
+      placeholder="Thông tin sản phẩm"
+      className="text-lg "
+    />
   );
 }

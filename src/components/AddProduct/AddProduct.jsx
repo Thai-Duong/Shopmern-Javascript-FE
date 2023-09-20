@@ -3,13 +3,12 @@ import { Button, Modal } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import "react-quill/dist/quill.bubble.css";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { REACT_API_URL } from "../../utils/http";
 import Input from "../Input";
-import Textarea from "../Textarea";
-import { useNavigate } from "react-router-dom";
-
+import Textarea from "../Textarea/Textarea";
 const ProductSchema = yup
   .object({
     name: yup.string().required(),
@@ -20,6 +19,7 @@ const ProductSchema = yup
   .required();
 export default function AddProduct() {
   const [modal1Open, setModal1Open] = useState(false);
+
   const {
     control,
     handleSubmit,
@@ -39,12 +39,12 @@ export default function AddProduct() {
       });
   };
   return (
-    <>
+    <div className="w-[350px]">
       <Button
         type="primary"
         size="large"
         onClick={() => setModal1Open(true)}
-        className="text-black border border-blue-400"
+        className="text-black border border-blue-400 "
       >
         Thêm sản phẩm
       </Button>
@@ -58,11 +58,17 @@ export default function AddProduct() {
         onOk={() => setModal1Open(false)}
         onCancel={() => setModal1Open(false)}
         footer={null}
+        width={1000}
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="md:w-[400px] md:mx-auto w-[350px] mx-auto my-5">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid grid-cols-2 gap-5"
+        >
+          <div className="col-span-1">
             <div className="flex flex-col gap-3">
-              <label htmlFor="name">Tên sản phẩm</label>
+              <label htmlFor="name" className="font-bold">
+                Tên sản phẩm :
+              </label>
               <Input
                 name="name"
                 type="text"
@@ -77,7 +83,9 @@ export default function AddProduct() {
               </p>
             )}
             <div className="flex flex-col gap-3">
-              <label htmlFor="price">Giá sản phẩm</label>
+              <label htmlFor="price" className="font-bold">
+                Giá sản phẩm :
+              </label>
               <Input
                 name="price"
                 control={control}
@@ -91,7 +99,9 @@ export default function AddProduct() {
               </p>
             )}
             <div className="flex flex-col gap-3">
-              <label htmlFor="image">Hình ảnh</label>
+              <label htmlFor="image" className="font-bold">
+                Link hình ảnh :
+              </label>
               <Input
                 name="image"
                 control={control}
@@ -104,9 +114,18 @@ export default function AddProduct() {
                 Vui lòng điền vào trường này
               </p>
             )}
-
+            <button
+              type="submit"
+              className="h-[50px] w-full bg-blue-600 rounded-lg text-white"
+            >
+              Thêm sản phẩm
+            </button>
+          </div>
+          <div className="col-span-1">
             <div className="flex flex-col gap-3">
-              <label htmlFor="description">Chi tiết</label>
+              <label htmlFor="description" className="font-bold">
+                Chi tiết :
+              </label>
               <Textarea
                 name="description"
                 type="text"
@@ -116,22 +135,14 @@ export default function AddProduct() {
             </div>
             {errors.description && (
               <p className="text-sm text-red-500">
-                {" "}
                 Vui lòng điền vào trường này
               </p>
             )}
-
-            <button
-              type="submit"
-              className="h-[50px] w-full bg-blue-600 rounded-lg text-white"
-            >
-              Thêm sản phẩm
-            </button>
           </div>
         </form>
       </Modal>
       <br />
       <br />
-    </>
+    </div>
   );
 }

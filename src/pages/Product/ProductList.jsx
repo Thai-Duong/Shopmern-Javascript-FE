@@ -186,9 +186,8 @@ export default function ProductList() {
               style={{
                 margin: 20,
               }}
-            >
-              {record.description}
-            </p>
+              dangerouslySetInnerHTML={{ __html: record.description }}
+            ></p>
           ),
           rowExpandable: (record) => record.name !== "Not Expandable",
         }}

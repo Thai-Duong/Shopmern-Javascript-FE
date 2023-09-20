@@ -13,14 +13,14 @@ export default function Product({ item }) {
       <Card
         hoverable
         style={{
-          width: 200,
+          width: 180,
           height: 300,
         }}
         cover={
           <img
             alt="photoProduct"
             src={item.image}
-            className="h-[200px] border"
+            className="h-[200px] border w-full"
           />
         }
       >

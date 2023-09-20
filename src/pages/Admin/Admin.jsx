@@ -64,22 +64,6 @@ export default function Admin() {
     getUser();
     getProduct();
   }, []);
-  // const labels = order.map((order) => {
-  //   return order.name;
-  // });
-  // const data = order.map((order) => {
-  //   return order.totalAmount;
-  // });
-  // const dataSourse = {
-  //   labels,
-  //   datasets: [
-  //     {
-  //       label: "Số tiền",
-  //       data: data,
-  //       backgroundColor: "rgba(255, 206, 86, 0.2)",
-  //     },
-  //   ],
-  // };
   return (
     <div className="">
       <div className="">Dashboard</div>
@@ -127,9 +111,6 @@ export default function Admin() {
           </Space>
         </Card>
       </Space>
-      {/* <div className="">
-        <Bar options={options} data={dataSourse} />;
-      </div> */}
     </div>
   );
 }
