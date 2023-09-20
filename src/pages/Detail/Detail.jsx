@@ -36,7 +36,7 @@ export default function Detail() {
           </div>
         </div>
         <div className="col-span-12 lg:col-span-7">
-          <div className="mt-3 text-xl font-medium uppercase">
+          <div className="mt-3 ml-2 text-xl font-medium uppercase">
             {product.name}
           </div>
           <div className="flex items-center px-5 py-4 mt-8 bg-gray-50">

@@ -28,6 +28,7 @@ export default function Cart() {
   };
   return (
     <div className="px-4 mx-auto mt-10 max-w-7xl">
+      <div className="m-2 text-2xl font-bold">Giỏ hàng</div>
       {cart.length > 0 ? (
         <div className="xl:px-[100px]">
           {cart.length > 0 &&
@@ -40,21 +41,21 @@ export default function Cart() {
                 hanldePlusCart={hanldePlusCart}
               ></ItemCart>
             ))}
-          <div className="flex justify-between">
+          <div className="flex justify-between mx-2">
             <Button
               type="primary"
               danger
               onClick={() => hanldeClearCart()}
-              size="large"
+              size="small"
             >
-              Xóa Tất Cả Sản Phẩm
+              Xóa Tất Cả
             </Button>
             <div className="flex">
-              <div className="my-auto mr-3 text-xl xl:text-2xl">
+              <div className="text-sm xl:text-xl">
                 Thành Tiền: {formatCurrency(totalAmount)}
               </div>
               <Link
-                className="px-3 py-2 my-auto text-sm bg-blue-300 border xl:text-xl"
+                className="px-2 ml-2 text-sm bg-blue-300 border xl:text-xl"
                 to="/payment"
               >
                 Thanh Toán
