@@ -20,7 +20,7 @@ export default function Product({ item }) {
           <img
             alt="photoProduct"
             src={item.image}
-            className="h-[200px] border w-full"
+            className="h-[200px] border w-full px-5"
           />
         }
       >

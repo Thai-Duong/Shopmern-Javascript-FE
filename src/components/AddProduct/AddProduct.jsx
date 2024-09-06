@@ -9,6 +9,7 @@ import * as yup from "yup";
 import { REACT_API_URL } from "../../utils/http";
 import Input from "../Input";
 import Textarea from "../Textarea/Textarea";
+import { useNavigate } from "react-router-dom";
 const ProductSchema = yup
   .object({
     name: yup.string().required(),
@@ -19,6 +20,7 @@ const ProductSchema = yup
   .required();
 export default function AddProduct() {
   const [modal1Open, setModal1Open] = useState(false);
+  const navigate = useNavigate();
 
   const {
     control,

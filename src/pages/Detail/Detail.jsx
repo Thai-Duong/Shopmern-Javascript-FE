@@ -29,9 +29,9 @@ export default function Detail() {
         <div className="col-span-12 lg:col-span-5">
           <div className="relative w-full cursor-zoom-in overflow-hidden pt-[100%]">
             <img
-              className="absolute top-0 left-0 object-cover w-full h-full bg-white pointer-events-none"
+              className="px-[80px] absolute top-0 left-0 object-cover w-full h-full bg-white pointer-events-none"
               src={product.image}
-              alt=""
+              alt="img-book"
             />
           </div>
         </div>

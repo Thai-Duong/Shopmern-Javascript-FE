@@ -51,7 +51,6 @@ export default function LayoutAdmin({ children }) {
   }
   const [keySelected, setKeySelected] = useState("");
 
-  const navigate = useNavigate();
   const items = [
     getItem("Dashboard", "admin", <UserOutlined />),
     getItem("Người dùng", "users", <UserOutlined />),
