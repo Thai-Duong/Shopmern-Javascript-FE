@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 
 export default function LayoutClient({ children }) {
   return (
-    <div>
+    <div className="bg-gray-200">
       <Header />
       {children}
       <Footer />

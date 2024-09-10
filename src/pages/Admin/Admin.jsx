@@ -29,18 +29,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "bot",
-    },
-    title: {
-      display: true,
-      text: "Chart.js Bar Chart",
-    },
-  },
-};
 
 export default function Admin() {
   const order = useSelector((state) => state.order.order);

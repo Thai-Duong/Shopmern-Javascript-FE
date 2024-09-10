@@ -61,7 +61,7 @@ export default function LayoutAdmin({ children }) {
     setKeySelected(key);
   };
   return (
-    <Layout className="p-0">
+    <Layout className="h-screen p-0 bg-gray-400">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <Link
           to="/admin"

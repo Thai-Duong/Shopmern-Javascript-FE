@@ -14,3 +14,7 @@ export const getIdFormNameId = (nameId) => {
   const arr = nameId.split("-i,");
   return arr[arr.length - 1];
 };
+export const getStringtoYear = (date) => {
+  const d = new Date(date);
+  return d.getFullYear();
+};

@@ -16,11 +16,11 @@ const ProductSchema = yup
     price: yup.string().required(),
     image: yup.string().required(),
     description: yup.string().required(),
+    type: yup.string().required(),
   })
   .required();
 export default function AddProduct() {
   const [modal1Open, setModal1Open] = useState(false);
-  const navigate = useNavigate();
 
   const {
     control,
@@ -77,6 +77,127 @@ export default function AddProduct() {
                 control={control}
                 placeholder="Tên sản phẩm"
               ></Input>
+            </div>
+            {errors.name && (
+              <p className="text-sm text-red-500">
+                {" "}
+                Vui lòng điền vào trường này
+              </p>
+            )}
+            <div className="flex flex-col gap-3">
+              <label htmlFor="name" className="font-bold">
+                Tên Tác Giả :
+              </label>
+              <Input
+                name="author"
+                type="text"
+                control={control}
+                placeholder="Tên tác giả"
+              ></Input>
+            </div>
+            {errors.name && (
+              <p className="text-sm text-red-500">
+                {" "}
+                Vui lòng điền vào trường này
+              </p>
+            )}
+            <div className="flex flex-col gap-3">
+              <label htmlFor="name" className="font-bold">
+                Tên Nhà Cung Cấp :
+              </label>
+              <Input
+                name="supplier"
+                type="text"
+                control={control}
+                placeholder="Tên Nhà Cung Cấp"
+              ></Input>
+            </div>
+            {errors.name && (
+              <p className="text-sm text-red-500">
+                {" "}
+                Vui lòng điền vào trường này
+              </p>
+            )}
+            <div className="flex flex-col gap-3">
+              <label htmlFor="name" className="font-bold">
+                Tên Nhà Xuất Bản :
+              </label>
+              <Input
+                name="publisher"
+                type="text"
+                control={control}
+                placeholder="Tên nhà xuất bản"
+              ></Input>
+            </div>
+            {errors.name && (
+              <p className="text-sm text-red-500">
+                {" "}
+                Vui lòng điền vào trường này
+              </p>
+            )}
+            <div className="flex flex-col gap-3">
+              <label htmlFor="name" className="font-bold">
+                Số Trang :
+              </label>
+              <Input
+                name="page"
+                type="number"
+                control={control}
+                placeholder="Số Trang"
+              ></Input>
+            </div>
+            {errors.name && (
+              <p className="text-sm text-red-500">
+                {" "}
+                Vui lòng điền vào trường này
+              </p>
+            )}
+            <div className="flex flex-col gap-3">
+              <label htmlFor="name" className="font-bold">
+                Ngôn ngữ :
+              </label>
+              <Input
+                name="language"
+                type="text"
+                control={control}
+                placeholder="Ngôn ngữ"
+              ></Input>
+            </div>
+            {errors.name && (
+              <p className="text-sm text-red-500">
+                {" "}
+                Vui lòng điền vào trường này
+              </p>
+            )}
+            <div className="flex flex-col gap-3">
+              <label htmlFor="name" className="font-bold">
+                Năm xuất bản :
+              </label>
+              <Input
+                name="yearPublish"
+                type="text"
+                control={control}
+                placeholder="Năm xuất bản"
+              ></Input>
+            </div>
+            {errors.name && (
+              <p className="text-sm text-red-500">
+                {" "}
+                Vui lòng điền vào trường này
+              </p>
+            )}
+            <div className="col-span-1">
+              <div className="flex flex-col gap-3">
+                <label htmlFor="name" className="font-bold">
+                  Tên thể loại :
+                </label>
+                <Input
+                  name="type"
+                  type="text"
+                  control={control}
+                  placeholder="Tên thể loại"
+                ></Input>
+              </div>
             </div>
             {errors.name && (
               <p className="text-sm text-red-500">

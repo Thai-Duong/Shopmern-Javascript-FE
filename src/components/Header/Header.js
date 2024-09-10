@@ -40,12 +40,22 @@ export default function Header() {
           <div className="flex justify-end">
             <Popover
               title={
-                <button
-                  className="block w-full px-3 py-2 text-left bg-white"
-                  onClick={handleLogout}
-                >
-                  Đăng Xuất
-                </button>
+                <div>
+                  {userData.isAdmin === true ? (
+                    <Link
+                      to="/admin"
+                      className="block w-full px-3 py-2 text-left bg-white"
+                    >
+                      Quản Lý Admin
+                    </Link>
+                  ) : null}
+                  <button
+                    className="block w-full px-3 py-2 text-left bg-white hover:text-blue-400"
+                    onClick={handleLogout}
+                  >
+                    Đăng Xuất
+                  </button>
+                </div>
               }
             >
               {userData ? (

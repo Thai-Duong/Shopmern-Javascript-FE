@@ -10,7 +10,7 @@ import AddProduct from "../../components/AddProduct/AddProduct";
 import Delete from "../../components/Delete";
 import UpdateProduct from "../../components/UpdateProduct";
 import { REACT_API_URL } from "../../utils/http";
-import { formatCurrency } from "../../utils/utils";
+import { formatCurrency, getStringtoYear } from "../../utils/utils";
 export default function ProductList() {
   //Table
   const [searchText, setSearchText] = useState("");
@@ -148,7 +148,7 @@ export default function ProductList() {
     {
       title: "Hình Ảnh",
       dataIndex: "image",
-      render: (image) => <img src={image} alt={image} />,
+      render: (image) => <img src={image} alt={image} className="h-[100px]" />,
       width: 150,
     },
     {
@@ -162,7 +162,27 @@ export default function ProductList() {
       title: "Giá",
       dataIndex: "price",
       key: "price",
+      width: 100,
       render: (price) => <p>{formatCurrency(price)} đ</p>,
+    },
+    {
+      title: "Trang",
+      dataIndex: "page",
+      key: "page",
+      render: (text) => <p>{text}</p>,
+    },
+    {
+      title: "Năm XB",
+      dataIndex: "yearPublish",
+      key: "yearPublish",
+      render: (text) => <p>{getStringtoYear(text)}</p>,
+    },
+    {
+      title: "Nhà cung cấp",
+      dataIndex: "supplier",
+      key: "supplier",
+      render: (text) => <p>{text}</p>,
+      ...getColumnSearchProps("name"),
     },
     {
       title: "Action",
