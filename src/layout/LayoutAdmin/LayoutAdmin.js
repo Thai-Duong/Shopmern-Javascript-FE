@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
 import {
   AppstoreOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   ShoppingCartOutlined,
-  UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Button, theme, Divider } from "antd";
-import UserList from "../../pages/User";
-import ProductList from "../../pages/Product";
-import OrderList from "../../pages/Order";
+import { Button, Layout, Menu, theme } from "antd";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Admin from "../../pages/Admin";
+import OrderList from "../../pages/Order";
+import ProductList from "../../pages/Product";
+import UserList from "../../pages/User";
 
 const { Header, Sider, Content } = Layout;
-export default function LayoutAdmin({ children }) {
+export default function LayoutAdmin() {
   const userData = useSelector((state) => state.user.profile);
   const [collapsed, setCollapsed] = useState(false);
   const {

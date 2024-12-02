@@ -41,20 +41,27 @@ export default function Header() {
             <Popover
               title={
                 <div>
-                  {userData.isAdmin === true ? (
-                    <Link
-                      to="/admin"
-                      className="block w-full px-3 py-2 text-left bg-white"
-                    >
-                      Quản Lý Admin
-                    </Link>
+                  {userData?.isAdmin === true ? (
+                    <div className="">
+                      <Link
+                        to="/admin"
+                        className="block w-full px-3 py-2 text-left bg-white"
+                      >
+                        Quản Lý Admin
+                      </Link>
+                      <button
+                        className="block w-full px-3 py-2 text-left bg-white hover:text-blue-400"
+                        onClick={handleLogout}
+                      >
+                        Đăng Xuất
+                      </button>
+                    </div>
                   ) : null}
-                  <button
-                    className="block w-full px-3 py-2 text-left bg-white hover:text-blue-400"
-                    onClick={handleLogout}
-                  >
-                    Đăng Xuất
-                  </button>
+                  {!userData ? (
+                    <div className="block w-full px-3 py-2 text-left bg-white">
+                      Đăng Nhập và Đăng Ký
+                    </div>
+                  ) : null}
                 </div>
               }
             >
