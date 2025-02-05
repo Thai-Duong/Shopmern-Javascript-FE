@@ -1,25 +1,35 @@
 import {
   ShoppingCartOutlined,
   ShoppingOutlined,
-  UserOutlined,
+  DollarOutlined,
 } from "@ant-design/icons";
-import { Card, Space, Statistic } from "antd";
-import axios from "axios";
 import {
-  BarElement,
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  Title,
-  Tooltip,
-} from "chart.js";
-import React, { useEffect } from "react";
+  Card,
+  Space,
+  Statistic,
+  Table,
+  Select,
+  DatePicker,
+  Button,
+  message,
+} from "antd";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Bar } from "react-chartjs-2";
 import { setOrder } from "../../redux/orderSlice";
 import { setProduct } from "../../redux/productSlice";
-import { setUser } from "../../redux/userSlice";
 import { REACT_API_URL } from "../../utils/http";
+import * as XLSX from "xlsx";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
 ChartJS.register(
   CategoryScale,
@@ -32,73 +42,87 @@ ChartJS.register(
 
 export default function Admin() {
   const order = useSelector((state) => state.order.order);
-  const user = useSelector((state) => state.user.users);
   const product = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
-  const getOrder = async () => {
-    const res = await axios.get(`${REACT_API_URL}/order/getAll`);
-    dispatch(setOrder(res.data));
-  };
-  const getUser = async () => {
-    const res = await axios.get(`${REACT_API_URL}/users/getAll`);
-    dispatch(setUser(res.data));
-  };
-  const getProduct = async (data) => {
-    const res = await axios.get(`${REACT_API_URL}/products/getAll`, data);
-    dispatch(setProduct(res.data));
-  };
+
   useEffect(() => {
-    getOrder();
-    getUser();
-    getProduct();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const [orderRes, productRes] = await Promise.all([
+          axios.get(`${REACT_API_URL}/order/getAll`),
+          axios.get(`${REACT_API_URL}/products/getAll`),
+        ]);
+        dispatch(setOrder(orderRes.data));
+        dispatch(setProduct(productRes.data));
+      } catch (error) {
+        message.error("Lỗi khi tải dữ liệu, vui lòng thử lại!");
+      }
+    };
+    fetchData();
+  }, [dispatch]);
+
+  const totalRevenue = order
+    ?.reduce((sum, o) => {
+      return sum + (Number(o.totalAmount) || 0);
+    }, 0)
+    .toFixed(2);
+  const getOrdersByMonth = () => {
+    const ordersByMonth = {};
+
+    order.forEach((o) => {
+      const month = o.createdAt.slice(0, 7); // Lấy năm-tháng (YYYY-MM)
+      if (!ordersByMonth[month]) {
+        ordersByMonth[month] = 0;
+      }
+      ordersByMonth[month] += 1; // Đếm số đơn trong tháng
+    });
+
+    return {
+      labels: Object.keys(ordersByMonth), // Danh sách tháng
+      datasets: [
+        {
+          label: "Số đơn hàng",
+          data: Object.values(ordersByMonth), // Số đơn mỗi tháng
+          backgroundColor: "rgba(75,192,192,0.6)",
+        },
+      ],
+    };
+  };
+
   return (
-    <div className="">
-      <div className="">Dashboard</div>
+    <div>
+      <h2>Dashboard</h2>
       <Space>
         <Card>
-          <Space direction="horizontal">
-            <ShoppingCartOutlined
-              style={{
-                color: "green",
-                backgroundColor: "rgba(0,255,0,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-            <Statistic title="Đơn Hàng" value={order.length} />
-          </Space>
+          <Statistic
+            title="Tổng Đơn Hàng"
+            value={order.length}
+            prefix={<ShoppingCartOutlined />}
+          />
         </Card>
         <Card>
-          <Space direction="horizontal">
-            <ShoppingOutlined
-              style={{
-                color: "black",
-                backgroundColor: "rgba(0,255,0,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-            <Statistic title="Sản Phẩm" value={product.length} />
-          </Space>
+          <Statistic
+            title="Sản Phẩm"
+            value={product.length}
+            prefix={<ShoppingOutlined />}
+          />
         </Card>
         <Card>
-          <Space direction="horizontal">
-            <UserOutlined
-              style={{
-                color: "blue",
-                backgroundColor: "rgba(0,255,0,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-            <Statistic title="Tài Khoản" value={user.length} />
-          </Space>
+          <Statistic
+            title="Doanh Thu"
+            value={totalRevenue}
+            prefix={<DollarOutlined />}
+          />
         </Card>
       </Space>
+
+      <h3>Biểu đồ đơn hàng theo tháng</h3>
+      <div style={{ height: "400px" }}>
+        <Bar
+          data={getOrdersByMonth()}
+          options={{ maintainAspectRatio: false }}
+        />
+      </div>
     </div>
   );
 }

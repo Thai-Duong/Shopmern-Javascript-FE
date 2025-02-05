@@ -10,7 +10,7 @@ export default function ItemCart({
   return (
     <div
       key={item.id}
-      className="grid items-center grid-cols-12 gap-2 m-2 border md:gap-7 "
+      className="grid items-center grid-cols-12 gap-2 m-2 md:gap-7 h-[160px] "
     >
       <img
         src={item.image}
@@ -19,9 +19,11 @@ export default function ItemCart({
       />
       <div className="col-span-8 md:col-span-10">
         <div className="justify-between gap-2 py-2 ml-5 text-sm md:flex">
-          <div className="font-bold">{item.name}</div>
-          <div>{formatCurrency(item.price)} đ</div>
-          <div className="flex ">
+          <div className="flex flex-col justify-between h-[160px]">
+            <div className="font-bold">{item.name}</div>
+            <div>{formatCurrency(item.price)} đ</div>
+          </div>
+          <div className="flex">
             <button onClick={() => hanldeMinusCart(item)}>➖</button>
             <div className="px-3 border">{item.cartQuantity}</div>
             <button onClick={() => hanldePlusCart(item)}>➕</button>

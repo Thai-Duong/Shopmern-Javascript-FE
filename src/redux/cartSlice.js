@@ -10,6 +10,15 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    calculateTotals: (state) => {
+      state.totalAmount = state.cart
+        .filter((item) => item.selected) // Chỉ tính tổng tiền sản phẩm đã chọn
+        .reduce((total, item) => total + item.price * item.cartQuantity, 0);
+      state.cartQuantity = state.cart.reduce(
+        (total, item) => total + item.cartQuantity,
+        0
+      );
+    },
     addToCart: (state, action) => {
       const itemsIndex = state.cart.findIndex(
         (item) => item._id === action.payload._id
@@ -17,64 +26,66 @@ export const cartSlice = createSlice({
       if (itemsIndex >= 0) {
         state.cart[itemsIndex].cartQuantity += 1;
       } else {
-        const items = { ...action.payload, cartQuantity: 1 };
+        const items = {
+          ...action.payload,
+          cartQuantity: 1,
+          selected: false, // Khởi tạo mặc định
+        };
         state.cart.push(items);
       }
-      state.totalAmount = state.cart.reduce(
-        (total, item) => total + Number(item.price) * Number(item.cartQuantity),
-        0
-      );
+      cartSlice.caseReducers.calculateTotals(state);
     },
+
     delToCart: (state, action) => {
-      const itemsIndex = state.cart.filter(
-        (item) => item._id !== action.payload._id
-      );
-      state.cart = itemsIndex;
-      state.totalAmount = state.cart.reduce(
-        (total, item) => total + Number(item.price) * Number(item.cartQuantity),
-        0
-      );
+      state.cart = state.cart.filter((item) => item._id !== action.payload._id);
+      cartSlice.caseReducers.calculateTotals(state);
     },
     descreaseCart: (state, action) => {
       const itemsIndex = state.cart.findIndex(
         (item) => item._id === action.payload._id
       );
-      if (state.cart[itemsIndex].cartQuantity >= 1) {
-        state.cart[itemsIndex].cartQuantity -= 1;
-      } else if (state.cart[itemsIndex].cartQuantity < 1) {
-        const itemsIndex = state.cart.filter(
-          (item) => item._id !== action.payload._id
-        );
-        state.cart = itemsIndex;
+      if (itemsIndex >= 0) {
+        if (state.cart[itemsIndex].cartQuantity > 1) {
+          state.cart[itemsIndex].cartQuantity -= 1;
+        } else {
+          state.cart = state.cart.filter(
+            (item) => item._id !== action.payload._id
+          );
+        }
       }
-      state.totalAmount = state.cart.reduce(
-        (total, item) => total + Number(item.price) * Number(item.cartQuantity),
-        0
-      );
+      cartSlice.caseReducers.calculateTotals(state);
     },
     increaseCart: (state, action) => {
       const itemsIndex = state.cart.findIndex(
         (item) => item._id === action.payload._id
       );
-      if (state.cart[itemsIndex].cartQuantity >= 1) {
+      if (itemsIndex >= 0) {
         state.cart[itemsIndex].cartQuantity += 1;
       }
-      state.totalAmount = state.cart.reduce(
-        (total, item) => total + Number(item.price) * Number(item.cartQuantity),
-        0
-      );
+      cartSlice.caseReducers.calculateTotals(state);
     },
-    clearCart: (state) => {
-      state.cart = [];
-      state.totalAmount = state.cart.reduce(
-        (total, item) => total + Number(item.price) * Number(item.cartQuantity),
-        0
+    toggleSelect: (state, action) => {
+      console.log("Payload:", action.payload); // Log payload
+      const itemIndex = state.cart.findIndex(
+        (item) => item._id === action.payload._id
       );
+      console.log("Item Index:", itemIndex); // Log kết quả tìm kiếm
+      if (itemIndex >= 0) {
+        state.cart[itemIndex].selected = action.payload.selected;
+        console.log("Full Cart State:", JSON.stringify(state.cart, null, 2));
+      } else {
+        console.error("Item not found in cart with _id:", action.payload._id);
+      }
     },
   },
 });
 
-export const { addToCart, delToCart, clearCart, increaseCart, descreaseCart } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  delToCart,
+  increaseCart,
+  descreaseCart,
+  toggleSelect,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

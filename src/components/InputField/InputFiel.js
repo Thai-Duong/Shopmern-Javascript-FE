@@ -1,3 +1,4 @@
+import { Checkbox } from "antd";
 import React from "react";
 
 export default function InputFiel({ handleChange, value, title, name }) {

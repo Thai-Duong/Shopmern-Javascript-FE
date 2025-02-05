@@ -1,23 +1,24 @@
-import { Modal, Space, Table } from "antd";
+import { Space, Table } from "antd";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { REACT_API_URL } from "../../utils/http";
-import { setUser } from "../../redux/userSlice";
-import UpdateUser from "../../components/UpdateUser";
 import Delete from "../../components/Delete";
+import UpdateUser from "../../components/UpdateUser";
+import { setUser } from "../../redux/userSlice";
+import { REACT_API_URL } from "../../utils/http";
 
 export default function UserList() {
-  const user = useSelector((state) => state.user.users);
+  const users = useSelector((state) => state.user.users);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const deleteUser = async (id) => {
     await axios.delete(`${REACT_API_URL}/users/delete/${id}`);
     toast.success("Xóa Tài Khoản Thành Công");
     navigate("/admin");
   };
-  const dispatch = useDispatch();
 
   const getUser = async () => {
     const res = await axios.get(`${REACT_API_URL}/users/getAll`);
@@ -26,14 +27,15 @@ export default function UserList() {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [dispatch]);
+
   const columns = [
     {
       title: "STT",
-      accessor: "index",
+      dataIndex: "index",
       width: 50,
       fixed: "left",
-      render: (text, object, index) => index + 1,
+      render: (text, record, index) => index + 1,
     },
     {
       title: "Tên",
@@ -57,6 +59,12 @@ export default function UserList() {
       key: "phone",
     },
     {
+      title: "Tài Khoản",
+      dataIndex: "isAdmin",
+      key: "isAdmin",
+      render: (isAdmin) => <p>{isAdmin ? "Admin" : "User"}</p>, // Hiển thị Admin/User
+    },
+    {
       title: "Action",
       key: "action",
       render: (_, record) => (
@@ -68,5 +76,11 @@ export default function UserList() {
     },
   ];
 
-  return <Table columns={columns} dataSource={user} />;
+  return (
+    <Table
+      columns={columns}
+      dataSource={users}
+      rowKey="_id" // Đảm bảo mỗi dòng có key duy nhất
+    />
+  );
 }

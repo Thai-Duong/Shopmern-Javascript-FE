@@ -10,6 +10,7 @@ const Detail = lazy(() => import("./pages/Detail"));
 const Payment = lazy(() => import("./pages/Payment"));
 const Cart = lazy(() => import("./pages/Cart"));
 const Admin = lazy(() => import("./pages/Admin/Admin"));
+const Profile = lazy(() => import("./pages/Profile"));
 
 export default function useRouteElement() {
   // eslint-disable-next-line no-sparse-arrays
@@ -75,7 +76,16 @@ export default function useRouteElement() {
         </LayoutClient>
       ),
     },
-
+    {
+      path: "/profile",
+      element: (
+        <LayoutClient>
+          <Suspense>
+            <Profile />,
+          </Suspense>
+        </LayoutClient>
+      ),
+    },
     {
       path: "/admin",
       element: (

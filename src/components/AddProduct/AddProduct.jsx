@@ -9,7 +9,6 @@ import * as yup from "yup";
 import { REACT_API_URL } from "../../utils/http";
 import Input from "../Input";
 import Textarea from "../Textarea/Textarea";
-import { useNavigate } from "react-router-dom";
 const ProductSchema = yup
   .object({
     name: yup.string().required(),
@@ -30,6 +29,7 @@ export default function AddProduct() {
     resolver: yupResolver(ProductSchema),
   });
   const onSubmit = (data) => {
+    console.log("data", data);
     axios
       .post(`${REACT_API_URL}/products/create`, data)
       .then(function () {
@@ -200,6 +200,22 @@ export default function AddProduct() {
               </div>
             </div>
             {errors.name && (
+              <p className="text-sm text-red-500">
+                {" "}
+                Vui lòng điền vào trường này
+              </p>
+            )}
+            <div className="flex flex-col gap-3">
+              <label htmlFor="price_before_discount" className="font-bold">
+                Giá sản phẩm trước khuyến mãi :
+              </label>
+              <Input
+                name="price_before_discount"
+                control={control}
+                placeholder="Giá sản phẩm truoc khuyen mai"
+              ></Input>
+            </div>
+            {errors.price_before_discount && (
               <p className="text-sm text-red-500">
                 {" "}
                 Vui lòng điền vào trường này

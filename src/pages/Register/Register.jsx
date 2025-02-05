@@ -16,6 +16,7 @@ const RegisterSchema = yup
     comfirm_password: yup.string().required(),
     address: yup.string().required(),
     phone: yup.string().required(),
+    isAdmin: yup.boolean(),
   })
   .required();
 
@@ -25,6 +26,15 @@ export default function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      name: "",
+      phone: "",
+      password: "",
+      comfirm_password: "",
+      address: "",
+      email: "",
+      isAdmin: false, // giá trị mặc định là false
+    },
     resolver: yupResolver(RegisterSchema),
   });
   const navigate = useNavigate();
@@ -37,7 +47,7 @@ export default function Register() {
           return toast.error(response.data.message);
         }
         toast.success("Register success");
-        navigate("/");
+        navigate("/login");
       })
       .catch(function (error) {
         console.log(error);

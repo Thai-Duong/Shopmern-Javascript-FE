@@ -1,10 +1,9 @@
+import { SearchOutlined } from "@ant-design/icons";
 import { Button, Input, Space, Table } from "antd";
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { formatCurrency } from "../../utils/utils";
 import Highlighter from "react-highlight-words";
-import { SearchOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
+import { formatCurrency } from "../../utils/utils";
 
 export default function OrderList() {
   const order = useSelector((state) => state.order.order);

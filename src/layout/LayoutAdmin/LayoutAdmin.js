@@ -13,6 +13,7 @@ import Admin from "../../pages/Admin";
 import OrderList from "../../pages/Order";
 import ProductList from "../../pages/Product";
 import UserList from "../../pages/User";
+import FeedbackLists from "../../pages/Feedbacks";
 
 const { Header, Sider, Content } = Layout;
 export default function LayoutAdmin() {
@@ -34,6 +35,8 @@ export default function LayoutAdmin() {
         return <ProductList />;
       case "orders":
         return <OrderList />;
+      case "feedbacks":
+        return <FeedbackLists />;
       default:
         return <></>;
     }
@@ -54,6 +57,7 @@ export default function LayoutAdmin() {
     getItem("Người dùng", "users", <UserOutlined />),
     getItem("Sản phẩm", "products", <AppstoreOutlined />),
     getItem("Đơn hàng", "orders", <ShoppingCartOutlined />),
+    getItem("Nhận Xét", "feedbacks", <ShoppingCartOutlined />),
   ];
   const handleOnCLick = ({ key }) => {
     setKeySelected(key);

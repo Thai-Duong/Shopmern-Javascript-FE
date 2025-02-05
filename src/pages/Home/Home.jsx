@@ -5,6 +5,7 @@ import Product from "../../components/Product/Product";
 import { setProduct } from "../../redux/productSlice";
 import { REACT_API_URL } from "../../utils/http";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import Banner from "../../components/Banner";
 export default function Home() {
   const product = useSelector((state) => state.product.products);
   const [category, setSelectCategory] = useState(null);
@@ -33,21 +34,24 @@ export default function Home() {
   const result = filterData(product, category);
 
   return (
-    <div className="flex px-4 mx-auto max-w-7xl">
-      <div className="hidden lg:block w-full lg:w-[20%] mr-5">
-        <Sidebar handleChange={handleChange} />
+    <>
+      <Banner />
+      <div className="flex px-4 mx-auto max-w-7xl">
+        <div className="hidden lg:block w-full lg:w-[20%] mr-5">
+          <Sidebar handleChange={handleChange} />
+        </div>
+        <div className="h-full lg:w-[80%] grid grid-cols-3 gap-5 md:grid-cols-3 lg:grid-cols-4 ">
+          {result.length > 0 ? (
+            result.map((item) => (
+              <div className="span-col-1 gap-5">
+                <Product item={item} />
+              </div>
+            ))
+          ) : (
+            <div className="p-2 font-semibold">KHÔNG CÓ SẢN PHẨM</div>
+          )}
+        </div>
       </div>
-      <div className="h-full lg:w-[80%] grid grid-cols-3 gap-3 md:grid-cols-4 lg:grid-cols-5 ">
-        {result.length > 0 ? (
-          result.map((item) => (
-            <div className="span-col-1">
-              <Product item={item} />
-            </div>
-          ))
-        ) : (
-          <div className="p-2 font-semibold">KHÔNG CÓ SẢN PHẨM</div>
-        )}
-      </div>
-    </div>
+    </>
   );
 }
